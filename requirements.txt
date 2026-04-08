@@ -1,0 +1,10 @@
+numpy
+pandas
+pyvista
+trimesh
+torch
+h5py
+scipy.spatial
+pickle
+plotly
+seaborn
