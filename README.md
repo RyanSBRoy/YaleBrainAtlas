@@ -296,9 +296,9 @@ Subject.Param_0 = np.random.randn(696)
 Subject.L_MF2_A.Param_1 = 2
 Subject.L_SF2_C.Param_1 = 2
 Subject.L_TP1_A.Param_1 = 2
-Runa.L_MF3_B.Param_1 = 2
+Subject.L_MF3_B.Param_1 = 2
 
-Runa.L_MF3_B.Param_2 = 4
+Subject.L_MF3_B.Param_2 = 4
 
 yba.new("SamplePlot") #creates a new plot
 yba.add_parcels(['Param_0', 'Param_1', 'Param_2'], segment='whole', opacity=1,
