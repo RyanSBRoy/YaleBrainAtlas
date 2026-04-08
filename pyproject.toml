@@ -29,7 +29,8 @@ dependencies = [
   "h5py",
   "scipy",
   "plotly",
-  "seaborn"
+  "seaborn",
+  "kaleido"
 ]
 
 [tool.hatch.build.targets.wheel]
