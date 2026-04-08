@@ -10,10 +10,10 @@ import numbers
 import os
 import sys
 
-from YaleBrainAtlas.src.YaleBrainAtlas.attributes import BrainAttribute, MapProxy, ListProxy, TensorProxy, ArrayProxy
-from YaleBrainAtlas.src.YaleBrainAtlas.parcel import Parcel
-from YaleBrainAtlas.src.YaleBrainAtlas.yba import YaleBrainAtlas
-from YaleBrainAtlas.src.YaleBrainAtlas.tract import Tract
+from YaleBrainAtlas.attributes import BrainAttribute, MapProxy, ListProxy, TensorProxy, ArrayProxy
+from YaleBrainAtlas.parcel import Parcel
+from YaleBrainAtlas.yba import YaleBrainAtlas
+from YaleBrainAtlas.tract import Tract
 
 # with open("TractNames.txt", "r") as file_t:
 #     tractNames = [line.rstrip('\n') for line in file_t]
