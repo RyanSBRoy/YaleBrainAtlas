@@ -13,7 +13,14 @@
     - [Connectivities](#connectivities)
     - [Other Data Types](#other-data-types)
 - [Visualization](#visualization)
+  - [Example Walkthrough](#example-walkthrough-1)
+    - [Instantiation](#instantiation)
+    - [Create a new plots](#create-a-new-plots)
+    - [Add parcels](#add-parcels)
+    - [Visualizing Plots](#visualizing-plots)
+    - [Visualizing multiple parameters](#visualizing-multiple-parameters)
   - [White Matter Tracts](#white-matter-tracts)
+  - [Other functionalities](#other-functionalities)
 
 
 # The Yale Brain Atlas
@@ -165,10 +172,135 @@ This should work for most common data types. Note that in the above example, the
 
 # Visualization
 
-The visualizer 
+The visualizer for the Yale Brain Atlas can visualize parcels and a variety of super-imposed parameters.
+
+## Example Walkthrough
+
+### Instantiation
+
+The visualizer needs a YBA object to initialize and reference.
+
+```python
+from YaleBrainAtlas import *
+
+Subject = YaleBrainAtlas('Subject')
+yba = YBAVisualizer(Subject)
 
 ```
 
+### Create a new plots
+
+Plots in the visualizer are plotly graph objects. the '.fig' attribute for the visualizer returns the plotly graph object itself, which can be modified using the standard plotly graph object functions.
+
+```python
+yba.new("SamplePlot") #creates a new plot
+print(yba.fig) #prints the plot we are currently in, which is SamplePlot
+yba.new("NewPlot") #creates a new plot
+print(yba.fig) #prints the plot we are currently in, which is NewPlot
+print(list(yba.figures)) #prints 'Main' (default), 'SamplePlot' and 'NewPlot', since these are the new plots we created
+yba.set('SamplePlot') #brings us back to SamplePlot
+yba.fig #this is the the plot we are currently in (SamplePlot)
+```
+
+That individual plotly plots are stored in the 'yba' visualizer as a dictionary called 'yba.figures', so the standard dictionary operations can be used to add, retrieve, change, or delete plots.
+
+### Add parcels
+
+Parcels can be added by using the '.add_parcels' attribute. 
+
+'.add_parcels' takes as arguments:
+1. 'intensities': list of 696, 690, or len(parcel_labels) corresponding to the intensity of the parameter on the colorscale
+2. 'segment': 'whole', 'left_hemisphere', 'right_hemisphere', or list of parcels to show
+3. 'labels': list of 696, 690, or len(parcel_labels) corresponding to the hovertext labels for the parcels
+4. 'colorscale': plotly colorscale (e.g. 'Reds', 'Blues', 'Greens')
+5. 'opacity': the opacity of the parcels being shown (between 0 and 1)
+6. **kwargs: any other plotly arguments for plotly.fig.add_trace
+
+```python
+Subject = YaleBrainAtlas('Subject')
+yba = YBAVisualizer(Subject)
+
+Subject.CCEPs = np.random.randn(696)
+
+yba.new("SamplePlot") #creates a new plot
+yba.add_parcels('clusters', segment='whole', opacity=1, colorscale='Rainbow',
+                lighting=dict(ambient=0.1,
+                diffuse=1,
+                fresnel=3,  
+                specular=0.5, 
+                roughness=0.05),
+                lightposition=dict(x=100,
+                                    y=200,
+                                    z=1000),)
+yba.show("SamplePlot")
+
+```
+
+Parcel groupings can be colored separately
+
+```python
+Subject = YaleBrainAtlas('Subject')
+yba = YBAVisualizer(Subject)
+
+Subject.CCEPs = np.random.randn(696)
+
+RTP = ParcelNames[np.where(np.char.startswith(ParcelNames, 'L_TP'))].tolist()
+NotRTP = ParcelNames[np.where(~np.char.startswith(ParcelNames, 'L_TP'))].tolist()
+
+yba.new("ClearerPole")
+yba.add_parcels('CCEPs', RTP, colorscale='Blues', opacity=0.5)
+yba.add_parcels('CCEPs', NotRTP, colorscale='Reds', opacity=1)
+yba.show("ClearerPole")
+```
+
+### Visualizing Plots
+For greater customizability, I recommend using the plotly visualization from .fig directly, rather than the yba.show() function.
+
+```python
+yba.new("SamplePlot") #creates a new plot
+yba.add_parcels('clusters', segment='whole', opacity=1, colorscale='Rainbow',
+                lighting=dict(ambient=0.1,
+                diffuse=1,
+                fresnel=3,  
+                specular=0.5, 
+                roughness=0.05),
+                lightposition=dict(x=100,
+                                    y=200,
+                                    z=1000),)
+
+yba.fig.update_layout(title_text='Title') #allows us to set our own title
+yba.fig.show()
+```
+
+### Visualizing multiple parameters
+In this case, we just show the count for each parcel that has multiple parameters defined for it. For parcels that have only one parameter defined for them, we show their corresponding parameter intensity.
+
+```python
+Subject = YaleBrainAtlas('Subject')
+yba = YBAVisualizer(Subject)
+
+Subject.Param_0 = np.random.randn(696)
+
+Subject.L_MF2_A.Param_1 = 2
+Subject.L_SF2_C.Param_1 = 2
+Subject.L_TP1_A.Param_1 = 2
+Runa.L_MF3_B.Param_1 = 2
+
+Runa.L_MF3_B.Param_2 = 4
+
+yba.new("SamplePlot") #creates a new plot
+yba.add_parcels(['Param_0', 'Param_1', 'Param_2'], segment='whole', opacity=1,
+                lighting=dict(ambient=0.1,
+                diffuse=1,
+                fresnel=3,  
+                specular=0.5, 
+                roughness=0.05),
+                lightposition=dict(x=100,
+                                    y=200,
+                                    z=1000),)
+
+yba.fig.update_layout(title_text='Title') #allows us to set our own title
+yba.fig.show()
 ```
 
 ## White Matter Tracts
@@ -177,3 +309,9 @@ Currently, the YBA is built for parcel visualization and analysis. The user must
     1. 'points': a single array of all the (x, y, z) coordinates for all the streamlines of the tract, in MNI152 space. 
     2. 'offsets': a list of indices indicating the start index in 'points' for each fiber in the tract
     3. 'transform': a transformation matrix between MNI and subject space. 
+
+## Other functionalities
+
+The parcel objects have a function to create a convex hull around a that parcel, given a voxel mesh of cubes.
+
+The atlas object has a function to determine the closest parcels to a set of points in MNI152 space. 
