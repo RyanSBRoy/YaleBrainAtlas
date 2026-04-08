@@ -232,7 +232,7 @@ Parcels can be added by using the '.add_parcels' attribute.
 Subject = YaleBrainAtlas('Subject')
 yba = YBAVisualizer(Subject)
 
-Subject.CCEPs = np.random.randn(696)
+Subject.Param_1 = np.random.randn(696)
 
 yba.new("SamplePlot") #creates a new plot
 yba.add_parcels('clusters', segment='whole', opacity=1, colorscale='Rainbow',
@@ -254,14 +254,14 @@ Parcel groupings can be colored separately
 Subject = YaleBrainAtlas('Subject')
 yba = YBAVisualizer(Subject)
 
-Subject.CCEPs = np.random.randn(696)
+Subject.Param_1 = np.random.randn(696)
 
 RTP = ParcelNames[np.where(np.char.startswith(ParcelNames, 'L_TP'))].tolist()
 NotRTP = ParcelNames[np.where(~np.char.startswith(ParcelNames, 'L_TP'))].tolist()
 
 yba.new("ClearerPole")
-yba.add_parcels('CCEPs', RTP, colorscale='Blues', opacity=0.5)
-yba.add_parcels('CCEPs', NotRTP, colorscale='Reds', opacity=1)
+yba.add_parcels('Param_1', RTP, colorscale='Blues', opacity=0.5)
+yba.add_parcels('Param_1', NotRTP, colorscale='Reds', opacity=1)
 yba.show("ClearerPole")
 ```
 
@@ -301,7 +301,7 @@ Runa.L_MF3_B.Param_1 = 2
 Runa.L_MF3_B.Param_2 = 4
 
 yba.new("SamplePlot") #creates a new plot
-yba.add_parcels(['Param_0', '.Param_1', 'Param_2'], segment='whole', opacity=1,
+yba.add_parcels(['Param_0', 'Param_1', 'Param_2'], segment='whole', opacity=1,
                 lighting=dict(ambient=0.1,
                 diffuse=1,
                 fresnel=3,  
