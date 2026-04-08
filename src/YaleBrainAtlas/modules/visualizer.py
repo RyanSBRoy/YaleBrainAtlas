@@ -18,6 +18,8 @@ from YaleBrainAtlas.src.YaleBrainAtlas.tract import Tract
 # with open("TractNames.txt", "r") as file_t:
 #     tractNames = [line.rstrip('\n') for line in file_t]
 
+root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
 class YBAVisualizer:
     def __init__(self, yba):
         self.yba = yba
@@ -90,10 +92,11 @@ class YBAVisualizer:
         return fig.show()
 
     def export_all(self, folder="Figures", fmt="html"):
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+        folder_path = os.path.join(root, folder)
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
         for name, fig in self.figures.items():
-            filename = os.path.join(folder, f"{name}.{fmt}")
+            filename = os.path.join(folder_path, f"{name}.{fmt}")
             if fmt == "html":
                 fig.write_html(filename)
             else:

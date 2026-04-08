@@ -19,7 +19,7 @@ from YaleBrainAtlas.src.YaleBrainAtlas.attributes import BrainAttribute, MapProx
 from YaleBrainAtlas.src.YaleBrainAtlas.parcel import Parcel
 from YaleBrainAtlas.src.YaleBrainAtlas.tract import Tract
 
-root = os.path.dirname(os.path.abspath(__file__))
+root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 class YaleBrainAtlas:
     def __init__(self, name, root=root):
@@ -28,14 +28,14 @@ class YaleBrainAtlas:
 
         #LOAD PHYSICAL DATA
         #pyvista object of whole brain (I'm considering this the surfaces mesh, it's a bit easier than having individual mesh files)
-        wb = pv.read(os.path.join(root, '..', 'data/YBA_surfaces_full.vtp'))
+        wb = pv.read(os.path.join(root, 'data', 'YBA_surfaces_full.vtp'))
         super().__setattr__('whole_brain', wb) #load whole brain
         super().__setattr__('parcel_labels', wb['parcel_labels']) #parcel labels is used for more detailed surface labeling and color coding and things, so it's here -- but ideally I don't want to use this much
         super().__setattr__('brain_tree', cKDTree(wb.points)) #I've been doing a lot of 'closest point' searching stuff, which requires keeping the points in a cKDTree
 
         #NAMES AND INDICES
         #all the parcel names
-        with open(os.path.join(root, '..', "data/ParcelNames.txt"), "r") as file: 
+        with open(os.path.join(root, 'data', "ParcelNames.txt"), "r") as file: 
             names = [line.rstrip('\n') for line in file]
         indices = list(range(len(names)))
         #parcel names
@@ -71,7 +71,7 @@ class YaleBrainAtlas:
             super().__setattr__(name, Parcel(name, self))
 
         #TRACT OBJECTS
-        with open(os.path.join(root, '..', "data/TractNames.txt"), "r") as file_t:
+        with open(os.path.join(root, 'data', "TractNames.txt"), "r") as file_t:
             tractNames = [line.rstrip('\n') for line in file_t]
         super().__setattr__('tract_names', tractNames)
         for name_t in tractNames:
