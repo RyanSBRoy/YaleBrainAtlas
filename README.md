@@ -14,7 +14,7 @@ For the official version of the Yale Brain Atlas, please refer to work done by t
 
 # Analysis
 
-The YBA can be read and modified at the individual parcel level, as well as the global brain (atlas) level.
+The YBA can be fetched and modified at the individual parcel level, as well as the global brain (atlas) level.
 
 ## Example Walkthrough
 
@@ -50,9 +50,13 @@ Subject.clusters = pd.Series(Subject.parcel_names).map(dict(zip(Subject.parcel_n
 print(Subject.clusters)
 ```
 
-Note that Subject has both parcel_names (Subject.parcel_names) and parcel_names_noCC, which contains lists of parcel names with and without the Corpus Callosum respectively. 
+Note that Subject has both parcel_names (Subject.parcel_names), of length 696, and parcel_names_noCC, of length 690, which contain parcel names with and without the Corpus Callosum respectively. 
 
-The parameters can be visualized
+Parcel parameters can be numerical values or strings. The parcel parameters assigned to a YBA object can be obtained as a pandas dataframe through the 'parcel_parameters' attribute
+
+```
+Subject.parcel_parameters
+```
 
 
 Runa.clusters = pd.Series(Runa.parcel_names).map(dict(zip(Runa.parcel_names_noCC.copy(), clusters)))
