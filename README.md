@@ -20,7 +20,7 @@
 
 This repository is an **unofficial, work-in-progress** code library for the [Yale Brain Atlas](https://yalebrainatlas.github.io/YaleBrainAtlas/atlas_viewer.html#model=images/Yale_Brain_Atlas.obj,images/Yale_Brain_Atlas.mtl) (YBA). It can be used for analysis and visualization of the brain, from the level of individual parcels to the whole cortex. 
 
-For the official version of the Yale Brain Atlas, please refer to work done by the [Yale Clinical Neuroscience Neuroanalytics group](https://medicine.yale.edu/lab/ynn/), and the following [GitHub Page](https://github.com/YaleBrainAtlas/YaleBrainAtlas?tab=readme-ov-file).
+For the **official version** of the Yale Brain Atlas, please refer to work done by the [Yale Clinical Neuroscience Neuroanalytics group](https://medicine.yale.edu/lab/ynn/), and the following [GitHub Page](https://github.com/YaleBrainAtlas/YaleBrainAtlas?tab=readme-ov-file).
 
 # Analysis
 
@@ -142,9 +142,30 @@ print(Subject.FunctionalConnectivity.at['L_TP1_A', 'L_TP1_A'])
 
 ### Other Data Types
 
+The YBA can handle most other data types besides lists, sets, pandas dataframes or series objects. 
+Torch tensors should be set with shape (parcels, D1, D2, D3, ...), where parcels is the number of parcels, and D1, D2, etc. are arbitrary dimensions. Parcel-level retrieval and modification can be handled similarly as in the [#example-walkthrough].
 
+When in doubt, a good rule of thumb is to represent data as a dictionary, with the keys as parcel names and the values as the corresponding data.
+
+```python
+import trimesh
+mesh_group = {
+    'L_TP1_A': trimesh.Mesh(points, faces),
+    'L_TP1_B': trimesh.Mesh(points, faces),
+    ...
+    'R_CC_3': None
+}
+
+Subject.mesh = mesh_group
+
+Subject.L_TP1_B.mesh
+```
+
+This should work for most common data types. Note that in the above example, the data type was a trimesh object, which is handled explicitly by the YBA. 
 
 # Visualization
+
+The visualizer 
 
 ```
 
