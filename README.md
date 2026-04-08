@@ -43,7 +43,7 @@ Subject = YaleBrainAtlas('Subject')
 #### Defining parcel parameters at the whole-brain level
 
 There are 696 parcels in the Yale Brain Atlas.
-Parcel parameters can be defined globally for the brain as a list, set, or Pandas Series of 696 values, or a dictionary or pandas Dataframe of 696 keys/rows corresponding to the parcel name and one corresponding value per key/row.
+Parcel parameters can be defined globally for the brain as a list, set, or Pandas Series of 696 values, or a dictionary or pandas dataframe of 696 keys/rows corresponding to the parcel name and one corresponding value per key/row.
 
 ```
 Subject.CT = np.random.randn(696)
