@@ -1,10 +1,16 @@
+# The Yale Brain Atlas
+
+This repository is an **unofficial, work-in-progress** code library for the [Yale Brain Atlas](https://yalebrainatlas.github.io/YaleBrainAtlas/atlas_viewer.html#model=images/Yale_Brain_Atlas.obj,images/Yale_Brain_Atlas.mtl) (YBA). It can be used for analysis and visualization of the brain, from the level of individual parcels to the whole cortex. 
+
+For the **official version** of the Yale Brain Atlas, please refer to work done by the [Yale Clinical Neuroscience Neuroanalytics group](https://medicine.yale.edu/lab/ynn/), and the following [GitHub Page](https://github.com/YaleBrainAtlas/YaleBrainAtlas?tab=readme-ov-file).
+
 <picture>
     <img src="SampleColoredBrain.svg" alt="Description">
 </picture>
 
 # Table of Contents
-- [Table of Contents](#table-of-contents)
 - [The Yale Brain Atlas](#the-yale-brain-atlas)
+- [Table of Contents](#table-of-contents)
 - [Analysis](#analysis)
   - [Example Walkthrough](#example-walkthrough)
     - [Import and Instantiation](#import-and-instantiation)
@@ -24,12 +30,6 @@
     - [Visualizing multiple parameters](#visualizing-multiple-parameters)
   - [Other functionalities](#other-functionalities)
 
-
-# The Yale Brain Atlas
-
-This repository is an **unofficial, work-in-progress** code library for the [Yale Brain Atlas](https://yalebrainatlas.github.io/YaleBrainAtlas/atlas_viewer.html#model=images/Yale_Brain_Atlas.obj,images/Yale_Brain_Atlas.mtl) (YBA). It can be used for analysis and visualization of the brain, from the level of individual parcels to the whole cortex. 
-
-For the **official version** of the Yale Brain Atlas, please refer to work done by the [Yale Clinical Neuroscience Neuroanalytics group](https://medicine.yale.edu/lab/ynn/), and the following [GitHub Page](https://github.com/YaleBrainAtlas/YaleBrainAtlas?tab=readme-ov-file).
 
 # Analysis
 
