@@ -1,4 +1,4 @@
-<img src="SampleColoredBrain.svg" width="200" height="200" alt="Description">
+<img src="SampleColoredBrain.svg" alt="Description">
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
