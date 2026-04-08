@@ -22,12 +22,8 @@ dependencies = [
     "trimesh",
     "torch",
     "h5py",
-    "scipy.spatial",
-    "pickle",
+    "scipy",
     "plotly",
     "seaborn"
 ]
-[tool.setuptools.packages.find]
-where = ["."]
-license = "MIT"
-license-files = ["LICEN[CS]E*"]
+license = { text = "MIT" }
