@@ -11,7 +11,7 @@ For the **official version** of the Yale Brain Atlas, please refer to work done 
 # Table of Contents
 - [The Yale Brain Atlas](#the-yale-brain-atlas)
 - [Table of Contents](#table-of-contents)
-- [Analysis](#analysis)
+- [How to Use the Yale Brain Atlas: Analysis](#how-to-use-the-yale-brain-atlas-analysis)
   - [Example Walkthrough](#example-walkthrough)
     - [Import and Instantiation](#import-and-instantiation)
     - [Parcel Parameters](#parcel-parameters)
@@ -21,7 +21,7 @@ For the **official version** of the Yale Brain Atlas, please refer to work done 
       - [Defining parcel parameters at the individual parcel-level](#defining-parcel-parameters-at-the-individual-parcel-level)
     - [Connectivities](#connectivities)
     - [Other Data Types](#other-data-types)
-- [Visualization](#visualization)
+- [How to Use the Yale Brain Atlas: Visualization](#how-to-use-the-yale-brain-atlas-visualization)
   - [Example Walkthrough](#example-walkthrough-1)
     - [Instantiation](#instantiation)
     - [Create a new plots](#create-a-new-plots)
@@ -31,7 +31,7 @@ For the **official version** of the Yale Brain Atlas, please refer to work done 
   - [Other functionalities](#other-functionalities)
 
 
-# Analysis
+# How to Use the Yale Brain Atlas: Analysis
 
 The YBA can be fetched and modified at the individual parcel level, as well as the global brain (atlas) level.
 
@@ -172,7 +172,7 @@ Subject.L_TP1_B.mesh
 
 This should work for most common data types. Note that in the above example, the data type was a trimesh object, which is handled explicitly by the YBA. 
 
-# Visualization
+# How to Use the Yale Brain Atlas: Visualization
 
 The visualizer for the Yale Brain Atlas can visualize parcels and a variety of superimposed parameters.
 
