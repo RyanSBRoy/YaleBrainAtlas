@@ -19,7 +19,6 @@
     - [Add parcels](#add-parcels)
     - [Visualizing Plots](#visualizing-plots)
     - [Visualizing multiple parameters](#visualizing-multiple-parameters)
-  - [White Matter Tracts](#white-matter-tracts)
   - [Other functionalities](#other-functionalities)
 
 
@@ -302,13 +301,6 @@ yba.add_parcels(['Param_0', 'Param_1', 'Param_2'], segment='whole', opacity=1,
 yba.fig.update_layout(title_text='Title') #allows us to set our own title
 yba.fig.show()
 ```
-
-## White Matter Tracts
-Currently, the YBA is built for parcel visualization and analysis. The user must define their own set of streamlines. These streamlines must be in PyVista PolyLine format, or in .h5 format containing:
-
-    1. 'points': a single array of all the (x, y, z) coordinates for all the streamlines of the tract, in MNI152 space. 
-    2. 'offsets': a list of indices indicating the start index in 'points' for each fiber in the tract
-    3. 'transform': a transformation matrix between MNI and subject space. 
 
 ## Other functionalities
 
