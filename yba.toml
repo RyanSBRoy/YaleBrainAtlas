@@ -15,5 +15,19 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyvista",
+    "trimesh",
+    "torch",
+    "h5py",
+    "scipy.spatial",
+    "pickle",
+    "plotly",
+    "seaborn"
+]
+[tool.setuptools.packages.find]
+where = ["."]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
