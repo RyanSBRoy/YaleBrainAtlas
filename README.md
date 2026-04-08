@@ -4,6 +4,8 @@
     - [Import and Instantiation](#import-and-instantiation)
     - [Parcel Parameters](#parcel-parameters)
       - [Defining parcel parameters at the whole-brain level](#defining-parcel-parameters-at-the-whole-brain-level)
+        - [Working with 690 parcels (no corpus callosum) in the YBA](#working-with-690-parcels-no-corpus-callosum-in-the-yba)
+        - [Get all parcel parameters together](#get-all-parcel-parameters-together)
   - [Full Code](#full-code)
 - [Visualization](#visualization)
   - [White Matter Tracts](#white-matter-tracts)
@@ -49,7 +51,7 @@ Subject.PET = np.random.randn(696)
 print(Subject.PET)
 print(Subject.CT)
 ```
-**Working with 690 parcels (no corpus callosum) in the YBA**
+##### Working with 690 parcels (no corpus callosum) in the YBA
 Sometimes we exclude the corpus callosum in the YBA. This leaves us with values in the form of a list corresponding to 690 parcels, instead of 696. To bring this into a subject's brain atlas object, we must first transform the 690-parcel list into a 696-parcel list.
 
 ```
@@ -61,6 +63,7 @@ print(Subject.clusters)
 
 Note that Subject has both parcel_names (Subject.parcel_names), of length 696, and parcel_names_noCC, of length 690, which contain parcel names with and without the Corpus Callosum respectively. 
 
+##### Get all parcel parameters together
 Parcel parameters can be numerical values or strings. The parcel parameters assigned to a YBA object can be obtained as a pandas dataframe through the 'parcel_parameters' attribute
 
 ```
