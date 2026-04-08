@@ -19,7 +19,7 @@ from YaleBrainAtlas.attributes import BrainAttribute, MapProxy, ListProxy, Tenso
 from YaleBrainAtlas.parcel import Parcel
 from YaleBrainAtlas.tract import Tract
 
-root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+root = os.path.dirname(os.path.abspath(__file__))
 
 class YaleBrainAtlas:
     def __init__(self, name, root=root):
