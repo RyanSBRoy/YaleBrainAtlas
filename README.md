@@ -1,6 +1,6 @@
-# The Yale Brain Atlas
+# A Yale Brain Atlas
 
-(A project by Ryan Bose-Roy)
+(By Ryan Bose-Roy)
 
 This repository is an **unofficial, work-in-progress** code library for the [Yale Brain Atlas](https://yalebrainatlas.github.io/YaleBrainAtlas/atlas_viewer.html#model=images/Yale_Brain_Atlas.obj,images/Yale_Brain_Atlas.mtl) (YBA). It can be used for analysis and visualization of the brain, from the level of individual parcels to the whole cortex. 
 
@@ -11,7 +11,7 @@ For the **official version** of the Yale Brain Atlas, please refer to work done 
 </picture>
 
 # Table of Contents
-- [The Yale Brain Atlas](#the-yale-brain-atlas)
+- [A Yale Brain Atlas](#a-yale-brain-atlas)
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [How to Use the Yale Brain Atlas: Analysis](#how-to-use-the-yale-brain-atlas-analysis)
