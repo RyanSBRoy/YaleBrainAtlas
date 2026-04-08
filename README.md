@@ -171,7 +171,7 @@ This should work for most common data types. Note that in the above example, the
 
 # Visualization
 
-The visualizer for the Yale Brain Atlas can visualize parcels and a variety of super-imposed parameters.
+The visualizer for the Yale Brain Atlas can visualize parcels and a variety of superimposed parameters.
 
 ## Example Walkthrough
 
