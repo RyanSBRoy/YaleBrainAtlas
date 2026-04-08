@@ -1,6 +1,9 @@
 - [The Yale Brain Atlas](#the-yale-brain-atlas)
 - [Analysis](#analysis)
   - [Example Walkthrough](#example-walkthrough)
+    - [Import and Instantiation](#import-and-instantiation)
+    - [Parcel Parameters](#parcel-parameters)
+      - [Defining parcel parameters at the whole-brain level](#defining-parcel-parameters-at-the-whole-brain-level)
   - [Full Code](#full-code)
 - [Visualization](#visualization)
   - [White Matter Tracts](#white-matter-tracts)
@@ -18,6 +21,7 @@ The YBA can be fetched and modified at the individual parcel level, as well as t
 
 ## Example Walkthrough
 
+### Import and Instantiation
 First, import the Yale Brain Atlas
 
 ```
@@ -30,6 +34,11 @@ Initialize a brain atlas for a sample subject
 ```
 Subject = YaleBrainAtlas('Subject')
 ```
+
+### Parcel Parameters
+
+#### Defining parcel parameters at the whole-brain level
+
 There are 696 parcels in the Yale Brain Atlas.
 Parcel parameters can be defined globally for the brain as a list, set, or Pandas Series of 696 values, or a dictionary or pandas Dataframe of 696 keys/rows corresponding to the parcel name and one corresponding value per key/row.
 
@@ -40,7 +49,7 @@ Subject.PET = np.random.randn(696)
 print(Subject.PET)
 print(Subject.CT)
 ```
-
+**Working with 690 parcels (no corpus callosum) in the YBA**
 Sometimes we exclude the corpus callosum in the YBA. This leaves us with values in the form of a list corresponding to 690 parcels, instead of 696. To bring this into a subject's brain atlas object, we must first transform the 690-parcel list into a 696-parcel list.
 
 ```
