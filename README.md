@@ -6,7 +6,8 @@
       - [Defining parcel parameters at the whole-brain level](#defining-parcel-parameters-at-the-whole-brain-level)
         - [Working with 690 parcels (no corpus callosum) in the YBA](#working-with-690-parcels-no-corpus-callosum-in-the-yba)
         - [Get all parcel parameters together](#get-all-parcel-parameters-together)
-  - [Full Code](#full-code)
+      - [Defining parcel parameters at the individual parcel-level](#defining-parcel-parameters-at-the-individual-parcel-level)
+    - [Connectivities](#connectivities)
 - [Visualization](#visualization)
   - [White Matter Tracts](#white-matter-tracts)
 
@@ -70,15 +71,67 @@ Parcel parameters can be numerical values or strings. The parcel parameters assi
 Subject.parcel_parameters
 ```
 
-
-Runa.clusters = pd.Series(Runa.parcel_names).map(dict(zip(Runa.parcel_names_noCC.copy(), clusters)))
-
-## Full Code
+#### Defining parcel parameters at the individual parcel-level
+Parcel objects in the YBA implement lazy caching, meaning that they first pull their value directly from the global Yale Brain Atlas object, and then store that value locally. 
 
 ```
+Subject.CT = np.random.randn(696)
+print(Subject.CT)
 
+print(Subject.L_TP1_A) #the CT value is not found as an attribute of the parcel, because we haven't called it yet
+
+print(Subject.L_TP1_A.CT)
+
+print(Subject.L_TP1_A) #the CT value will now be found as an attribute of the parcel...
+print(Subject.L_TP1_B) #...but it won't be found for L_TP1_B because we haven't asked for it yet! 
 ```
 
+You can change an existing attribute value for a parcel by modifying the parcel.
+```
+print(Subject.CT.at['L_TP1_A])
+Subject.L_TP1_A.CT = 5
+print(Subject.CT.at['L_TP1_A])
+```
+
+Modifying the attribute value for a parcel value at the whole-brain level is a bit more difficult, in that you will need to explicitly update the version counter so that the parcel knows to pull the value from the global Yale Brain Atlas object. I am currently working on getting the the YBA to handle this internally. 
+
+```
+print(Subject.L_TP1_A.CT)
+
+#use 'at': using '.loc' or setting Subject.CT['L_TP1_A'] directly creates a copy of the dataframe outside of the YBA
+Subject.CT.at['L_TP1_A'] = 6 
+
+Subject._bump_version('CT', parcel_idx=Subject.L_TP1_A.idx) 
+print(Subject.L_TP1_A.CT)
+```
+
+Whole-brain parcel parameters can be initialized at the level of parcels.
+
+```
+Subject.L_TP1_A.MEG = 5
+print(Subject.L_TP1_A.MEG)
+
+print(Subject.MEG) #you should see that MEG is set to 5, and every other parcel has None/NA
+print(Subject.parcel_parameters) #you should see that MEG is set to 5, and every other parcel has None/NA
+```
+
+
+### Connectivities
+
+Connectivities can be entered at the whole-brain level as a 696x696 pandas dataframe
+```
+Subject.FunctionalConnectivity = pd.DataFrame(np.ones([696, 696]), index=Subject.parcel_names, columns=Subject.parcel_names)
+print(Subject.L_TP1_A.FunctionalConnectivity)
+```
+
+Connectivities can be modified at either the parcel level, or the whole brain level
+```
+Subject.FunctionalConnectivity.at['L_TP1_A', 'L_TP1_A'] = 5
+print(Subject.L_TP1_A.FunctionalConnectivity)
+
+Subject.L_TP1_A.FunctionalConnectivity = 6
+print(Subject.FunctionalConnectivity.at['L_TP1_A', 'L_TP1_A'])
+```
 
 # Visualization
 
