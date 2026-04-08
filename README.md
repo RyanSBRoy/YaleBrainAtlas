@@ -1,4 +1,5 @@
-  
+<img src="SampleColoredBrain.svg" width="200" height="200" alt="Description">
+
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [The Yale Brain Atlas](#the-yale-brain-atlas)
