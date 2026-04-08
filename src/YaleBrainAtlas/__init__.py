@@ -1,6 +1,6 @@
-from .src.yba import YaleBrainAtlas
-from .src.parcel import Parcel
-from .src.tract import Tract
+from .yba import YaleBrainAtlas
+from .parcel import Parcel
+from .tract import Tract
 from .modules.visualizer import YBAVisualizer
 
 __all__ = ["YaleBrainAtlas", "Parcel", "Tract", "YBAVisualizer"]

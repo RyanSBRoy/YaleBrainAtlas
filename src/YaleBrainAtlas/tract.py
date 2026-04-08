@@ -13,7 +13,7 @@ import numbers
 import os
 import sys
 
-from YaleBrainAtlas.src.attributes import BrainAttribute, MapProxy, ListProxy, TensorProxy, ArrayProxy
+from YaleBrainAtlas.src.YaleBrainAtlas.attributes import BrainAttribute, MapProxy, ListProxy, TensorProxy, ArrayProxy
 
 INTRINSIC_TYPES = (numbers.Number, str)
 root = os.path.dirname(os.path.abspath(__file__))

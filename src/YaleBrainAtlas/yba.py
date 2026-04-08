@@ -15,9 +15,9 @@ import sys
 
 INTRINSIC_TYPES = (numbers.Number, str)
 
-from YaleBrainAtlas.src.attributes import BrainAttribute, MapProxy, ListProxy, TensorProxy, ArrayProxy
-from YaleBrainAtlas.src.parcel import Parcel
-from YaleBrainAtlas.src.tract import Tract
+from YaleBrainAtlas.src.YaleBrainAtlas.attributes import BrainAttribute, MapProxy, ListProxy, TensorProxy, ArrayProxy
+from YaleBrainAtlas.src.YaleBrainAtlas.parcel import Parcel
+from YaleBrainAtlas.src.YaleBrainAtlas.tract import Tract
 
 root = os.path.dirname(os.path.abspath(__file__))
 

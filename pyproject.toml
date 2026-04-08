@@ -1,29 +1,36 @@
 [build-system]
-requires = ["hatchling >= 1.26"]
+requires = ["hatchling>=1.26"]
 build-backend = "hatchling.build"
 
 [project]
 name = "YaleBrainAtlas"
 version = "0.0.1"
-authors = [
-  { name="Ryan Bose-Roy", email="ryansbroy@gmail.com" },
-]
-description = "An unofficial, work-in-progress, library for analysis and visualization of the Yale Brain Atlas"
+description = "An unofficial, work-in-progress library for analysis and visualization of the Yale Brain Atlas"
 readme = "README.md"
 requires-python = ">=3.10"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
+
+authors = [
+  { name = "Ryan Bose-Roy", email = "ryansbroy@gmail.com" }
 ]
-dependencies = [
-    "numpy",
-    "pandas",
-    "pyvista",
-    "trimesh",
-    "torch",
-    "h5py",
-    "scipy",
-    "plotly",
-    "seaborn"
-]
+
 license = { text = "MIT" }
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "numpy",
+  "pandas",
+  "pyvista",
+  "trimesh",
+  "torch",
+  "h5py",
+  "scipy",
+  "plotly",
+  "seaborn"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/YaleBrainAtlas"]
