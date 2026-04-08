@@ -1,3 +1,6 @@
+  
+# Table of Contents
+- [Table of Contents](#table-of-contents)
 - [The Yale Brain Atlas](#the-yale-brain-atlas)
 - [Analysis](#analysis)
   - [Example Walkthrough](#example-walkthrough)
@@ -8,6 +11,7 @@
         - [Get all parcel parameters together](#get-all-parcel-parameters-together)
       - [Defining parcel parameters at the individual parcel-level](#defining-parcel-parameters-at-the-individual-parcel-level)
     - [Connectivities](#connectivities)
+    - [Other Data Types](#other-data-types)
 - [Visualization](#visualization)
   - [White Matter Tracts](#white-matter-tracts)
 
@@ -101,6 +105,7 @@ print(Subject.L_TP1_A.CT)
 #use 'at': using '.loc' or setting Subject.CT['L_TP1_A'] directly creates a copy of the dataframe outside of the YBA
 Subject.CT.at['L_TP1_A'] = 6 
 
+#YOU NEED TO EXPLICITLY UPDATE THE VERSION COUNTER FOR THIS PARCEL'S ATTRIBUTE
 Subject._bump_version('CT', parcel_idx=Subject.L_TP1_A.idx) 
 print(Subject.L_TP1_A.CT)
 ```
@@ -108,13 +113,15 @@ print(Subject.L_TP1_A.CT)
 Whole-brain parcel parameters can be initialized at the level of parcels.
 
 ```python
+print('MEG' in Subject.attributes) #or Subject.parcel_parameters.columns --> should be False
+
 Subject.L_TP1_A.MEG = 5
 print(Subject.L_TP1_A.MEG)
 
-print(Subject.MEG) #you should see that MEG is set to 5, and every other parcel has None/NA
+print('MEG' in Subject.attributes) #you should see that MEG now exists 
+print(Subject.MEG) #you should see that MEG is set to 5 for L_TP1_A, and every other parcel has None/NA
 print(Subject.parcel_parameters) #you should see that MEG is set to 5, and every other parcel has None/NA
 ```
-
 
 ### Connectivities
 
@@ -132,6 +139,10 @@ print(Subject.L_TP1_A.FunctionalConnectivity)
 Subject.L_TP1_A.FunctionalConnectivity = 6
 print(Subject.FunctionalConnectivity.at['L_TP1_A', 'L_TP1_A'])
 ```
+
+### Other Data Types
+
+
 
 # Visualization
 
