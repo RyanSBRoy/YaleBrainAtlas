@@ -69,11 +69,11 @@ There are 696 parcels in the Yale Brain Atlas.
 Parcel parameters can be defined globally for the brain as a list, set, or Pandas Series of 696 values, or a dictionary or pandas dataframe of 696 keys/rows corresponding to the parcel name and one value per key/row.
 
 ```python
-Subject.CT = np.random.randn(696)
-Subject.PET = np.random.randn(696)
+Subject.Param_1 = np.random.randn(696)
+Subject.Param_2 = np.random.randn(696)
 
-print(Subject.PET)
-print(Subject.CT)
+print(Subject.Param_2)
+print(Subject.Param_1)
 ```
 ##### Working with 690 parcels (no corpus callosum) in the YBA
 Sometimes we exclude the corpus callosum in the YBA. This leaves us with values in the form of a list corresponding to 690 parcels, instead of 696. To bring this into a subject's brain atlas object, we must first transform the 690-parcel list into a 696-parcel list.
@@ -98,12 +98,12 @@ Subject.parcel_parameters
 Parcel objects in the YBA implement lazy caching, meaning that they first pull their value directly from the global Yale Brain Atlas object, and then store that value locally. 
 
 ```python
-Subject.CT = np.random.randn(696)
-print(Subject.CT)
+Subject.Param_1 = np.random.randn(696)
+print(Subject.Param_1)
 
 print(Subject.L_TP1_A) #the CT value is not found as an attribute of the parcel, because we haven't called it yet
 
-print(Subject.L_TP1_A.CT)
+print(Subject.L_TP1_A.Param_1)
 
 print(Subject.L_TP1_A) #the CT value will now be found as an attribute of the parcel...
 print(Subject.L_TP1_B) #...but it won't be found for L_TP1_B because we haven't asked for it yet! 
@@ -111,34 +111,34 @@ print(Subject.L_TP1_B) #...but it won't be found for L_TP1_B because we haven't 
 
 You can change an existing attribute value for a parcel by modifying the parcel.
 ```python
-print(Subject.CT.at['L_TP1_A'])
-Subject.L_TP1_A.CT = 5
-print(Subject.CT.at['L_TP1_A'])
+print(Subject.Param_1.at['L_TP1_A'])
+Subject.L_TP1_A.Param_1 = 5
+print(Subject.Param_1.at['L_TP1_A'])
 ```
 
 Modifying the attribute value for a parcel value at the whole-brain level is a bit more difficult, in that you will need to explicitly update the version counter so that the parcel knows to pull the value from the global Yale Brain Atlas object. I am currently working on getting the the YBA to handle this internally. 
 
 ```python
-print(Subject.L_TP1_A.CT)
+print(Subject.L_TP1_A.Param_1)
 
-#use 'at': using '.loc' or setting Subject.CT['L_TP1_A'] directly creates a copy of the dataframe outside of the YBA
-Subject.CT.at['L_TP1_A'] = 6 
+#use 'at': using '.loc' or setting Subject.Param_1['L_TP1_A'] directly creates a copy of the dataframe outside of the YBA
+Subject.Param_1.at['L_TP1_A'] = 6 
 
 #YOU NEED TO EXPLICITLY UPDATE THE VERSION COUNTER FOR THIS PARCEL'S ATTRIBUTE
-Subject._bump_version('CT', parcel_idx=Subject.L_TP1_A.idx) 
-print(Subject.L_TP1_A.CT)
+Subject._bump_version('Param_1', parcel_idx=Subject.L_TP1_A.idx) 
+print(Subject.L_TP1_A.Param_1)
 ```
 
 Whole-brain parcel parameters can be initialized at the level of parcels.
 
 ```python
-print('MEG' in Subject.attributes) #or Subject.parcel_parameters.columns --> should be False
+print('Param_3' in Subject.attributes) #or Subject.parcel_parameters.columns --> should be False
 
-Subject.L_TP1_A.MEG = 5
-print(Subject.L_TP1_A.MEG)
+Subject.L_TP1_A.Param_3 = 5
+print(Subject.L_TP1_A.Param_3)
 
-print('MEG' in Subject.attributes) #you should see that MEG now exists 
-print(Subject.MEG) #you should see that MEG is set to 5 for L_TP1_A, and every other parcel has None/NA
+print('Param_3' in Subject.attributes) #you should see that MEG now exists 
+print(Subject.Param_3) #you should see that MEG is set to 5 for L_TP1_A, and every other parcel has None/NA
 print(Subject.parcel_parameters) #you should see that MEG is set to 5, and every other parcel has None/NA
 ```
 
@@ -301,7 +301,7 @@ Runa.L_MF3_B.Param_1 = 2
 Runa.L_MF3_B.Param_2 = 4
 
 yba.new("SamplePlot") #creates a new plot
-yba.add_parcels(['Param_0', 'Param_1', 'Param_2'], segment='whole', opacity=1,
+yba.add_parcels(['Param_0', '.Param_1', 'Param_2'], segment='whole', opacity=1,
                 lighting=dict(ambient=0.1,
                 diffuse=1,
                 fresnel=3,  
