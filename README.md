@@ -13,6 +13,7 @@ For the **official version** of the Yale Brain Atlas, please refer to work done 
 # Table of Contents
 - [The Yale Brain Atlas](#the-yale-brain-atlas)
 - [Table of Contents](#table-of-contents)
+- [Installation](#installation)
 - [How to Use the Yale Brain Atlas: Analysis](#how-to-use-the-yale-brain-atlas-analysis)
   - [Example Walkthrough](#example-walkthrough)
     - [Import and Instantiation](#import-and-instantiation)
@@ -32,6 +33,13 @@ For the **official version** of the Yale Brain Atlas, please refer to work done 
     - [Visualizing multiple parameters](#visualizing-multiple-parameters)
   - [Other functionalities](#other-functionalities)
 
+# Installation
+
+Please download the github repo in the appropriate local directory and install using pip
+```
+git clone https://github.com/RyanSBRoy/YaleBrainAtlas.git
+pip install YaleBrainAtlas/
+```
 
 # How to Use the Yale Brain Atlas: Analysis
 
