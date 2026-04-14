@@ -110,7 +110,7 @@ class Parcel:
             else:
                 combined_meshes = getattr(self.yba, f"{att_name}_wb")
                 atlas_attribute[self.name] = att_value
-                combined_meshes = atlas_attribute.combine(merge=True) #combine the multiblock into single unstructured grid/polydata
+                combined_meshes = atlas_attribute.combine(merge_points=True) #combine the multiblock into single unstructured grid/polydata
 
         #setattr(self.yba, att_name, atlas_attribute) uncommenting this will clear the cache for all 696 parcels every time #this is sorta redundant because I'm already calling atlas_attribute and changing it. 
         if category is BrainAttribute.Mesh:
@@ -264,7 +264,7 @@ class Parcel:
         else:
         #checks if the attribute is in the broader atlas dictionary
             attribute_init = getattr(self.yba, attr, None) #gets the attribute from the YBA
-            if attribute_init is not None:
+            if attribute_init is not None or attr == 'mesh': #builds in explicity exception for mesh
                 # tries to figure out the (more complex) attribute type, so it can just extract the parcel information
                 if self.yba.attributes[attr] is BrainAttribute.Connectivity: # num_parcels x num_parcels pandas dataframe -> select the parcel column
                     attribute = attribute_init[self.name].to_dict() #this creates a NEW OBJECT, which is a problem because if I modify the dictionary I'm not modifying the original thing

@@ -190,7 +190,7 @@ class YaleBrainAtlas:
     
         elif category is BrainAttribute.Mesh:
             #create the multiblock for individual parcel meshes
-            super().__setattr__(att_name, self._all_parcel_dict.copy())
+            super().__setattr__(att_name, pv.MultiBlock(self._all_parcel_dict.copy()))
             super().__setattr__(f"{att_name}_wb", pv.PolyData())
         #initializes global storage container for new attribute of the atlas
         elif category in list(self._attribute_type_map):
@@ -225,7 +225,7 @@ class YaleBrainAtlas:
                 # Assuming att_value is a dict of trimeshes/pyvista objects
                 # We need to convert them and merge into one 'wb' object
                 # Note: PyVista MultiBlocks have a .combine() method
-                combined = att_value.combine(merge=True) if hasattr(att_value, 'combine') else att_value
+                combined = att_value.combine(merge_points=True) if hasattr(att_value, 'combine') else att_value
                 super().__setattr__(f"{att_name}_wb", combined)
 
                 #make sure to create the whole brain version of this
