@@ -161,6 +161,9 @@ class YaleBrainAtlas:
 
             else:
                 att_type = self._type_attribute_map[val_type]
+                
+        elif val_type in (pv.MultiBlock, pv.PointSet, pv.PolyData, pv.UnstructuredGrid, pv.StructuredGrid, pv.RectilinearGrid, pv.ImageData):
+            att_type = BrainAttribute.Mesh
 
         elif val_type in (list, set, pd.Series):
             if len(att_value) == len(self.parcel_names):

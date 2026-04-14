@@ -3,6 +3,7 @@ import pandas as pd
 from collections import deque
 from collections.abc import Iterable
 import trimesh
+import pyvista as pv
 import torch
 import numbers
 import os
@@ -31,7 +32,7 @@ class Parcel:
             category = BrainAttribute.MatrixTensor
         elif isinstance(att_value, (list, set)): #like a list of lists for EEG coordinates or something
             category = BrainAttribute.Group
-        elif isinstance(att_value, trimesh.Trimesh):
+        elif isinstance(att_value, (trimesh.Trimesh, pv.MultiBlock, pv.PointSet, pv.PolyData, pv.UnstructuredGrid, pv.ImageData, pv.StructuredGrid, pv.RectilinearGrid)):
             category = BrainAttribute.Mesh
         elif isinstance(att_value, INTRINSIC_TYPES) or not isinstance(att_value, Iterable):
             category = BrainAttribute.Intrinsic
