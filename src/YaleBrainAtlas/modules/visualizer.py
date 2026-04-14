@@ -6,7 +6,6 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import seaborn as sns
 import trimesh
-import numbers
 import os
 import sys
 
@@ -82,6 +81,14 @@ class YBAVisualizer:
         if name in self.figures:
             self.fig = self.figures[name]
             self.title = name
+
+    def update_layout(self, name, **kwargs):
+        if name not in self.figures:
+            raise KeyError(f"Error: Figure '{name}' does not exist.")
+        
+        fig = self.figures[name]
+        fig.update_layout(**kwargs)
+        return
     
     def show(self, name):
         if name not in self.figures:
@@ -104,12 +111,19 @@ class YBAVisualizer:
             print(f"Exported: {filename}")
 
 
-    def add_custom_mesh_plotly(self, vertices, faces, color='green', opacity=0.8, label='Custom Mesh'):
-        self.fig.add_trace(go.Mesh3d(
-            x=vertices[:,0], y=vertices[:,1], z=vertices[:,2],
-            i=faces[:,0], j=faces[:,1], k=faces[:,2],
-            color=color, opacity=opacity, name=label
-        ))
+    def add_custom_mesh(self, vertices, faces, color='green', opacity=0.8, label='Custom Mesh', **kwargs):
+        if isinstance(color, str):
+            self.fig.add_trace(go.Mesh3d(
+                x=vertices[:,0], y=vertices[:,1], z=vertices[:,2],
+                i=faces[:,0], j=faces[:,1], k=faces[:,2],
+                color=color, opacity=opacity, name=label, **kwargs
+            ))
+        else:
+            self.fig.add_trace(go.Mesh3d(
+                x=vertices[:,0], y=vertices[:,1], z=vertices[:,2],
+                i=faces[:,0], j=faces[:,1], k=faces[:,2],
+                vertexcolor=color, opacity=opacity, name=label, **kwargs
+            ))     
 
     def _rgb_to_hex(self, rgb_tuple):
         return '#{:02x}{:02x}{:02x}'.format(
